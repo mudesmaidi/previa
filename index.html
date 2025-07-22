@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Imagem com Link</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #111;
+        }
+        a img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        a img:hover {
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <a href="https://seulink.com" target="_blank" rel="noopener noreferrer">
+        <img src="minhafoto.jpg" alt="Foto enviada junto com o site" />
+    </a>
+</body>
+</html>
