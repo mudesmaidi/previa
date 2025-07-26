@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foto</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+    }
+
+    .story-container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .blurred {
+      filter: blur(15px);
+    }
+
+    .expired-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 2em;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+      z-index: 2;
+    }
+
+    .show-message {
+      opacity: 1;
+    }
+
+    .loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 1.5em;
+      z-index: 2;
+    }
+  </style>
+</head>
+<body>
+  <div class="story-container">
+    <div id="loading" class="loading">Carregando...</div>
+    
+    <img
+      id="storyImage"
+      src="imagem.png"
+      alt="Foto"
+      style="display: none;"
+    />
+    
+    <div id="expiredMessage" class="expired-message">
+      Essa foto privada expirou!
+    </div>
+  </div>
+
+  <script>
+    const image = document.getElementById("storyImage");
+    const message = document.getElementById("expiredMessage");
+    const loading = document.getElementById("loading");
+
+    // Quando a imagem carregar
+    image.onload = function() {
+      loading.style.display = "none";
+      image.style.display = "block";
+      
+      // Mostra a foto por 5 segundos, depois "expira"
+      setTimeout(() => {
+        image.classList.add("blurred");
+        message.classList.add("show-message");
+      }, 5000);
+    };
+
+    // Se a imagem não carregar
+    image.onerror = function() {
+      loading.innerHTML = "❌ Foto não encontrada<br><small>Verifique se o arquivo 'imagem.png' está na pasta</small>";
+    };
+
+    // Clique para "expirar" imediatamente
+    image.addEventListener("click", () => {
+      image.classList.add("blurred");
+      message.classList.add("show-message");
+    });
+  </script>
+</body>
+</html>
